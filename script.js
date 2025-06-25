@@ -185,6 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
         animateSocialIcons();
     }
 
+    function isCurrentQuestionAnswered() {
+    return userAnswers[currentQuestionIndex] !== null;
+    }
+
     // Show current question
     function showQuestion() {
         const question = questions[currentQuestionIndex];
@@ -210,26 +214,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Select an option
     function selectOption(selectedOption) {
-        userAnswers[currentQuestionIndex] = selectedOption;
-        
-        // Update UI
-        const options = document.querySelectorAll('.option-btn');
-        options.forEach(option => {
-            option.classList.remove('selected');
-            if (option.textContent === selectedOption) {
-                option.classList.add('selected');
-            }
-        });
-    }
+    userAnswers[currentQuestionIndex] = selectedOption;
+    
+    // Update UI
+    const options = document.querySelectorAll('.option-btn');
+    options.forEach(option => {
+        option.classList.remove('selected');
+        if (option.textContent === selectedOption) {
+            option.classList.add('selected');
+        }
+    });
+    
+    // Atualizar a barra de progresso
+    updateProgress();
+}
 
     // Navigate to next question
     function nextQuestion() {
-        if (currentQuestionIndex < questions.length - 1) {
-            currentQuestionIndex++;
-            showQuestion();
-            updateProgress();
-        }
+    if (!isCurrentQuestionAnswered()) {
+        showAlert("Por favor, selecione uma resposta antes de avançar.");
+        return;
     }
+    
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        showQuestion();
+        updateProgress();
+    }
+}
+
 
     // Navigate to previous question
     function prevQuestion() {
@@ -241,11 +254,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Update progress bar and text
-    function updateProgress() {
-        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-        progressBar.style.setProperty('--progress', `${progress}%`);
-        progressText.textContent = `${currentQuestionIndex + 1}/${questions.length}`;
-    }
+   function updateProgress() {
+    // Calcular quantas perguntas foram respondidas
+    const answeredQuestions = userAnswers.filter(answer => answer !== null).length;
+    const totalQuestions = questions.length;
+    
+    // Calcular progresso (usando answeredQuestions em vez de currentQuestionIndex)
+    const progress = (answeredQuestions / totalQuestions) * 100;
+    
+    // Atualizar a barra de progresso
+    progressBar.style.setProperty('--progress', `${progress}%`);
+    
+    // Atualizar o texto de progresso
+    progressText.textContent = `${answeredQuestions}/${totalQuestions}`;
+}
 
     // Submit quiz and show results
     function submitQuiz() {
