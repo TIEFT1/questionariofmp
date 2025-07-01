@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             question: "Quantos cursos de graduação a FMP oferece atualmente?",
-            options: ["3", "5", "7", "10"],
-            answer: "5"
+            options: ["3", "4", "7", "10"],
+            answer: "4"
         },
         {
             question: "Qual destes cursos NÃO é oferecido pela FMP?",
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             question: "Como é o processo seletivo para ingresso na FMP?",
             options: ["Vestibular tradicional", "ENEM", "Análise de histórico escolar", "Depende do curso"],
-            answer: "ENEM"
+            answer: "Vestibular tradicional"
         },
         {
             question: "Qual é a duração média dos cursos de graduação na FMP?",
