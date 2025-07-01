@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             question: "Qual destes cursos NÃO é oferecido pela FMP?",
-            options: ["Administração", "Ciências Contábeis", "Engenharia Civil", "Pedagogia"],
+            options: ["Administração", "Processos Gerenciais", "Engenharia Civil", "Pedagogia"],
             answer: "Engenharia Civil"
         },
         {
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             answer: "Conselho Superior"
         },
         {
-            question: "Quantos campi a FMP possui?",
+            question: "Quantos câmpus a FMP possui?",
             options: ["1", "2", "3", "4"],
             answer: "1"
         },
